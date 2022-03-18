@@ -1,16 +1,18 @@
+import "./customElement.js";
+
 function main() {
   const randomCatUrl =
-    "https://api.thecatapi.com/v1/images/search?limit=3&page=100&order=DESC";
+    "https://api.thecatapi.com/v1/images/search?limit=6&page=100&order=DESC";
   const breedCatUrl = "https://api.thecatapi.com/v1/breeds";
   const getBook = async () => {
     try {
       const response = await fetch(`${randomCatUrl}`);
       const responseJson = await response.json();
-      console.log(responseJson);
+      // console.log(responseJson);
       // console.log(response);
       renderAllCats(responseJson);
     } catch (error) {
-      showResponseMessage(error);
+      console.log("bbbbbbbbbb");
     }
   };
 
@@ -18,59 +20,88 @@ function main() {
     try {
       const response = await fetch(`${breedCatUrl}`);
       const responseJson = await response.json();
-      console.log(responseJson);
-      // console.log(response);
       renderCatBreed(responseJson);
     } catch (error) {
-      showResponseMessage(error);
+      console.log("aaaaaaaaaaaa");
     }
   };
 
   const renderCatBreed = (cats) => {
-    console.log(cats);
+    // console.log(cats);
     const listBookElement = document.querySelector("#listBreed");
     listBookElement.innerHTML = "";
 
     cats.forEach((cat) => {
-      console.log(cat.url);
+      // console.log(cat.url);
       listBookElement.innerHTML += `
-                <div class="col-lg-4 col-md-6 col-sm-12" style="margin-top: 12px;">
-                    <div class="card">
-                        <div class="card-body">
+                    <div class="card-breed">
+                    <img src="${cat.image.url}"></img>
+                    <div class="card-content">
+
                         <h1>${cat.name}</h1>
                         <p>${cat.description}</p>
-                        <img src="${cat.image.url}"></img>
                         </div>
                     </div>
-                </div>
             `;
     });
   };
 
+  function bookSearch(keyword) {
+    const filter = keyword.toUpperCase();
+    console.log(filter);
+    const item = document.querySelectorAll(".card-breed");
+    console.log(item);
+    for (let i = 0; i < item.length; i++) {
+      const titlesText = item[i].textContent || item[i].innerText;
+
+      if (titlesText.toUpperCase().indexOf(filter) > -1) {
+        item[i].style.display = "";
+      } else {
+        item[i].style.display = "none";
+      }
+    }
+  }
+
   const renderAllCats = (cats) => {
-    console.log(cats);
+    // console.log(cats);
     const listBookElement = document.querySelector("#listBook");
     listBookElement.innerHTML = "";
 
     cats.forEach((cat) => {
-      console.log(cat.url);
+      // console.log(cat.url);
       listBookElement.innerHTML += `
-                <div class="col-lg-4 col-md-6 col-sm-12" style="margin-top: 12px;">
-                    <div class="card">
+      
                         <div class="card-body">
                         <img src="${cat.url}"></img>
                         </div>
-                    </div>
-                </div>
+                   
             `;
     });
   };
   document.getElementById("refreshBtn").addEventListener("click", function () {
     getBook();
+    document.getElementById("breedTitle").innerHTML = "Ras Kucing";
   });
+
+  const formSearch = document.getElementById("searchBreed");
+
+  document
+    .getElementById("refreshBtnBreed")
+    .addEventListener("click", function () {
+      getCatBreed();
+      formSearch.reset();
+    });
   document.addEventListener("DOMContentLoaded", () => {
     getBook();
     getCatBreed();
+
+    formSearch.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const inputSearch = document.getElementById("myInput").value;
+
+      bookSearch(inputSearch);
+    });
   });
 }
 

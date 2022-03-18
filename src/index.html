@@ -3,29 +3,47 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Dicoding Books</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <title>Meow World</title>
   </head>
   <body>
     <header>
-      <nav class="navbar navbar-dark bg-primary">
-        <span class="navbar-brand mb-0 h1">MEOOOWWWWWWWWWWWWWWB </span>
-      </nav>
+      <app-bar></app-bar>
+      <banner-bar></banner-bar>
     </header>
-    <main class="container">
-      <div class="row">
-        <div class="col-12">
-          <div class="card">
-            <div class="card-header">
-              <h5 class="card-title">Input Buku</h5>
-            </div>
-            <div class="card-body"></div>
-          </div>
+    <main class="mainContainer">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title">
+            "women only make desperate cat make happiness"
+          </h5>
         </div>
       </div>
-      <button id="refreshBtn">Refresh Gambar</button>
 
-      <div id="listBook" class="row"></div>
-      <div id="listBreed" class="row"></div>
+      <button id="refreshBtn">Refresh Gambar &#x21bb</button>
+      <div class="catContainer" id="listBook"></div>
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title" id="breedTitle">
+            Cari Ras Kucing Kesukaanmu
+          </h5>
+        </div>
+      </div>
+      <form  id="searchBreed">
+        <label class="labelForm"><b>Search</b></label>
+        <input type="text" class="w3-input w3-border "id="myInput" placeholder="Search for names.." />
+        <div class="buttonContainer">
+        <button class="btn-submit" type="submit">Search Book</button>
+        <button id="refreshBtnBreed">Refresh &#x21bb</button>
+      </div>
+      </form>
+      <div class="textContainer" id="textContainer"></div>
+
+      <div class="breedContainer" id="listBreed"></div>
     </main>
+    <footer>
+      <h5>copyright &copy; 2022 by Aryanda Rizky</h5>
+    </footer>
   </body>
 </html>
