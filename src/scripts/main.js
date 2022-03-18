@@ -4,7 +4,7 @@ function main() {
   const randomCatUrl =
     "https://api.thecatapi.com/v1/images/search?limit=6&page=100&order=DESC";
   const breedCatUrl = "https://api.thecatapi.com/v1/breeds";
-  const getBook = async () => {
+  const getCats = async () => {
     try {
       const response = await fetch(`${randomCatUrl}`);
       const responseJson = await response.json();
@@ -46,7 +46,7 @@ function main() {
     });
   };
 
-  function bookSearch(keyword) {
+  const catBreedSearch = (keyword) => {
     const filter = keyword.toUpperCase();
     console.log(filter);
     const item = document.querySelectorAll(".card-breed");
@@ -60,16 +60,16 @@ function main() {
         item[i].style.display = "none";
       }
     }
-  }
+  };
 
   const renderAllCats = (cats) => {
     // console.log(cats);
-    const listBookElement = document.querySelector("#listBook");
-    listBookElement.innerHTML = "";
+    const listCatsElement = document.querySelector("#listCats");
+    listCatsElement.innerHTML = "";
 
     cats.forEach((cat) => {
       // console.log(cat.url);
-      listBookElement.innerHTML += `
+      listCatsElement.innerHTML += `
       
                         <div class="card-body">
                         <img src="${cat.url}"></img>
@@ -78,29 +78,27 @@ function main() {
             `;
     });
   };
-  document.getElementById("refreshBtn").addEventListener("click", function () {
-    getBook();
+  document.getElementById("refreshBtn").addEventListener("click", () => {
+    getCats();
     document.getElementById("breedTitle").innerHTML = "Ras Kucing";
   });
 
   const formSearch = document.getElementById("searchBreed");
 
-  document
-    .getElementById("refreshBtnBreed")
-    .addEventListener("click", function () {
-      getCatBreed();
-      formSearch.reset();
-    });
+  document.getElementById("refreshBtnBreed").addEventListener("click", () => {
+    getCatBreed();
+    formSearch.reset();
+  });
   document.addEventListener("DOMContentLoaded", () => {
-    getBook();
+    getCats();
     getCatBreed();
 
-    formSearch.addEventListener("submit", function (event) {
+    formSearch.addEventListener("submit", (event) => {
       event.preventDefault();
 
       const inputSearch = document.getElementById("myInput").value;
 
-      bookSearch(inputSearch);
+      catBreedSearch(inputSearch);
     });
   });
 }
