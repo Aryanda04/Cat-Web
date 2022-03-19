@@ -12,7 +12,7 @@ function main() {
       // console.log(response);
       renderAllCats(responseJson);
     } catch (error) {
-      console.log("bbbbbbbbbb");
+      // console.log("bbbbbbbbbb");
     }
   };
 
@@ -22,7 +22,7 @@ function main() {
       const responseJson = await response.json();
       renderCatBreed(responseJson);
     } catch (error) {
-      console.log("aaaaaaaaaaaa");
+      // console.log("aaaaaaaaaaaa");
     }
   };
 
