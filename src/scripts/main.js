@@ -3,36 +3,30 @@ import "./customElement.js";
 function main() {
   const randomCatUrl =
     "https://api.thecatapi.com/v1/images/search?limit=6&page=100&order=DESC";
-  const breedCatUrl = "https://api.thecatapi.com/v1/breeds";
   const getCats = async () => {
     try {
       const response = await fetch(`${randomCatUrl}`);
       const responseJson = await response.json();
-      // console.log(responseJson);
-      // console.log(response);
       renderAllCats(responseJson);
     } catch (error) {
-      // console.log("bbbbbbbbbb");
     }
   };
 
+  const breedCatUrl = "https://api.thecatapi.com/v1/breeds";
   const getCatBreed = async () => {
     try {
       const response = await fetch(`${breedCatUrl}`);
       const responseJson = await response.json();
       renderCatBreed(responseJson);
     } catch (error) {
-      // console.log("aaaaaaaaaaaa");
     }
   };
 
   const renderCatBreed = (cats) => {
-    // console.log(cats);
     const listBookElement = document.querySelector("#listBreed");
     listBookElement.innerHTML = "";
 
     cats.forEach((cat) => {
-      // console.log(cat.url);
       listBookElement.innerHTML += `
                     <div class="card-breed">
                     <img src="${cat.image.url}"></img>
@@ -63,12 +57,10 @@ function main() {
   };
 
   const renderAllCats = (cats) => {
-    // console.log(cats);
     const listCatsElement = document.querySelector("#listCats");
     listCatsElement.innerHTML = "";
 
     cats.forEach((cat) => {
-      // console.log(cat.url);
       listCatsElement.innerHTML += `
       
                         <div class="card-body">
